@@ -1,0 +1,11 @@
+Changes
+LICENSE
+MANIFEST
+Makefile.PL
+README
+eg/panel-viewer
+lib/Game/LevelMap.pm
+t/00-load.t
+t/Game-LevelMap.t
+t/pod-coverage.t
+t/pod.t
