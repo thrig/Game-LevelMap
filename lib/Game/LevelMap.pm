@@ -314,6 +314,10 @@ There is either too much or too little error checking.
 An actual game may want to adapt code from this module and make it less
 generic, as usually things like the map panel size will be fixed, etc.
 
+B<to_panel> redraws the whole thing each time. With a buffer and change
+checks this might only update points that have changed, which would save
+on display bandwidth (which may be a concern over SSH connections).
+
 =head1 SEE ALSO
 
 =over 4

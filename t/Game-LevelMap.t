@@ -26,6 +26,9 @@ eq_or_diff( $lm->level, $dots3x3 );
 dies_ok { Game::LevelMap->new( level       => [ [qw(. .)], [qw(.)] ] ) };
 dies_ok { Game::LevelMap->new( from_string => "..$/." ) };
 
+# better coverage purity
+dies_ok { Game::LevelMap->new( from_string => $s, level => $dots3x3 ) };
+
 # some complications around testing output that goes to a terminal
 my ( $buf, $want );
 
@@ -113,7 +116,9 @@ ok( capture { $lm->update_terminal( 5, 2, [ 1, 0 ], [ 2, 1 ] ) } eq $want )
   or buf2hex;
 
 # display point must not lie outside level map
-dies_ok { $lm->to_panel( @offs, @size, 999, 0 ) };
-dies_ok { $lm->to_panel( @offs, @size, 0,   -5 ) };
+for my $i ( -5, 999 ) {
+    dies_ok { $lm->to_panel( @offs, @size, $i, 0 ) };
+    dies_ok { $lm->to_panel( @offs, @size, 0,  $i ) };
+}
 
-done_testing 18
+done_testing 21
